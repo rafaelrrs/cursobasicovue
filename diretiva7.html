@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="stylesheet7.css" media="screen" />
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        
+        <input type="text" v-model='textDigitado'
+            v-on:keyup.enter="alterarNome('Programador - Rafael R')" />
+  
+        <ul>
+            <li v-for="item in array"
+            style="background: white"
+            @click="alerta($event)">
+                {{ item }}
+            </li>
+        </ul>
+        
+        red
+        <input @click="corP($event.target.value)" type="radio" name="cor" value="red" checked>
+        green
+        <input @click="corP($event.target.value)" type="radio" name="cor" value="green">
+        blue
+        <input @click="corP($event.target.value)" type="radio" name="cor" value="blue">
+        yellow
+        <input @click="corP($event.target.value)" type="radio" name="cor" value="yellow">
+
+        <p v-bind:class="classParagrafo">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae sit nulla eos voluptatibus asperiores ex molestiae expedita, soluta error fuga praesentium vero, vel saepe ab porro eveniet fugit sequi? In?
+        </p>
+
+        <!-- <style>
+            .red {background-color: red}
+            .green {background-color: blue}
+            .blue {background-color: green}
+            .yellow {background-color: yellow}
+        </style> -->
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                classParagrafo: 'red',
+                textDigitado: "",
+                array: []
+            },
+            methods: {
+                alterarNome() {
+                    this.array.push(this.textDigitado);
+                    this.textDigitado = '';
+                    console.log(event);
+                },
+                alerta(event) {
+                    element = event.target;
+                    if(element.style.background == 'white')
+                        event.target.style = "background: red";
+                    else
+                    event.target.style = "background: white";
+                },
+                corP(cor) {
+                    this.classParagrafo = cor;
+                }
+            }
+            
+        })
+    </script>
+
+</body>
+</html>

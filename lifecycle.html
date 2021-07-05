@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ nome }}
+    </div>
+
+    <script>
+        Vue.component('painel',{
+            data() {
+                return {
+                    titulo: 'Painel Notícias'
+                }
+            },
+            methods: {
+                alertDeAlgumacoisa() {
+                    this.titulo = "Alerta de Alguma Coisa";
+                }
+            },
+            template: `
+                <div>
+                    <h1>{{ titulo }}</h1>
+                    <button @click="alertDeAlgumacoisa()">Alert</button>
+                </div>
+            `
+        });
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                nome: 1
+            },
+            methods: {
+                atualizaQualquerCoisa() {
+                    this.nome += 1
+                },
+                destruir() {
+                    this.$destroy();
+                }
+            },
+            template: `
+                <div>
+                    <painel></painel>
+                    <br>
+                    {{ nome }}
+                    <button @click="atualizaQualquerCoisa()">Atualizar</button>
+                    <br>
+                    <button @click="destruir()">Destruir</button>
+                </div>
+            `,
+            beforeCreate() {
+                console.log("[beforeCreate] Antes de criar tudo ");
+            },
+            created() {
+                console.log("[created] Quando já foi criado");
+            },
+            beforeMount() {
+                console.log("[beforeMount] ANTES DE MONTAR TUDO");
+            },
+            mounted() {
+                console.log("[mounted] TUDO MONTADO [nome é: " + this.nome +" ]");
+            },
+            beforeUpdate() {
+                console.log("[beforeUpdate] o valor é: " + this.nome);
+            },
+            updated() {
+                console.log("[beforeUpdate] depois de atualizar agora é: " + this.nome);
+            },
+            beforeDestroy() {
+                console.log('Antes de DESTRUIR ' + this.nome);
+            },
+            destroyed() {
+                console.log('DESTRUIDO ' + this.nome);
+            },
+        })
+    </script>
+</body>
+</html>
